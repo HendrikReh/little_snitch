@@ -41,14 +41,6 @@
     },
     {
       "action": "allow",
-      "process": "/opt/homebrew/bin/python3",
-      "remote-domains": [
-        "pypi.org",
-        "files.pythonhosted.org"
-      ]
-    },
-    {
-      "action": "allow",
       "process": "/bin/zsh",
       "remote-domains": [
         "registry.npmjs.org"
