@@ -1,0 +1,86 @@
+{
+  "name": "Developer Safe Exceptions",
+  "description": "Narrow allow-rules for known-good developer workflows. Keep base deny rules in a separate group.",
+  "rules": [
+    {
+      "action": "allow",
+      "process": "/usr/bin/ssh",
+      "remote-hosts": [
+        "github.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/usr/bin/curl",
+      "remote-domains": [
+        "github.com",
+        "api.github.com",
+        "raw.githubusercontent.com",
+        "objects.githubusercontent.com",
+        "codeload.github.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/opt/homebrew/bin/curl",
+      "remote-domains": [
+        "github.com",
+        "api.github.com",
+        "raw.githubusercontent.com",
+        "objects.githubusercontent.com",
+        "codeload.github.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/usr/bin/python3",
+      "remote-domains": [
+        "pypi.org",
+        "files.pythonhosted.org"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/opt/homebrew/bin/python3",
+      "remote-domains": [
+        "pypi.org",
+        "files.pythonhosted.org"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/zsh",
+      "remote-domains": [
+        "registry.npmjs.org"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/bash",
+      "remote-domains": [
+        "registry.npmjs.org"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/sh",
+      "remote-domains": [
+        "registry.npmjs.org"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/usr/bin/curl",
+      "remote-domains": [
+        "formulae.brew.sh"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/opt/homebrew/bin/curl",
+      "remote-domains": [
+        "formulae.brew.sh"
+      ]
+    }
+  ]
+}

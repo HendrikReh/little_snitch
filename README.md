@@ -2,11 +2,12 @@
 
 Custom Little Snitch 6 rule groups for tightening outbound network control on macOS.
 
-This repository currently provides a deny-focused rule group for **high-risk executables** such as shells, scripting runtimes, and common download tools. The goal is to reduce the attack surface for malware, spyware, opportunistic exfiltration, and unwanted outbound activity by default. Little Snitch remote rule groups use the `.lsrules` JSON format and can be subscribed to directly from a secure HTTPS URL.  [oai_citation:1‡GitHub](https://github.com/leohidalgo/little-snitch---rule-groups?utm_source=chatgpt.com)
+This repository provides a deny-focused rule group for **high-risk executables** such as shells, scripting runtimes, and common download tools, paired with a separate allow-exceptions group for known-good developer workflows. The goal is to reduce the attack surface for malware, spyware, opportunistic exfiltration, and unwanted outbound activity by default. Little Snitch remote rule groups use the `.lsrules` JSON format and can be subscribed to directly from a secure HTTPS URL.
 
 ## Included Rule Groups
 
-### High-Risk Executables Deny
+### `high-risk-executables-deny.lsrules`
+
 Blocks outbound internet access for selected executables unless you create a more specific allow-rule.
 
 Covered paths:
@@ -27,25 +28,41 @@ Optional Homebrew rules are included but disabled by default:
 - `/opt/homebrew/bin/wget`
 - `/opt/homebrew/bin/python3`
 
+### `dev-safe-exceptions.lsrules`
+
+Narrow allow-rules for known-good developer workflows. Designed to be used alongside the deny group above — subscribe to both and Little Snitch will apply the most specific matching rule.
+
+Covered exceptions:
+
+| Process | Allowed destinations |
+| --- | --- |
+| `/usr/bin/ssh` | `github.com` |
+| `/usr/bin/curl`, `/opt/homebrew/bin/curl` | GitHub domains (API, raw, objects, codeload) |
+| `/usr/bin/curl`, `/opt/homebrew/bin/curl` | `formulae.brew.sh` |
+| `/usr/bin/python3`, `/opt/homebrew/bin/python3` | `pypi.org`, `files.pythonhosted.org` |
+| `/bin/sh`, `/bin/bash`, `/bin/zsh` | `registry.npmjs.org` |
+
 ## Subscribe in Little Snitch
 
-Use the raw file URL:
+In **Little Snitch Configuration**, subscribe to both rule groups:
 
-`https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/high-risk-executables-deny.lsrules`
+| Rule group | Raw URL |
+| --- | --- |
+| High-risk deny | `https://raw.githubusercontent.com/HendrikReh/little_snitch/main/high-risk-executables-deny.lsrules` |
+| Dev-safe exceptions | `https://raw.githubusercontent.com/HendrikReh/little_snitch/main/dev-safe-exceptions.lsrules` |
 
-In **Little Snitch Configuration**:
+Steps:
 
 1. Open **Rule Groups**
 2. Click **+**
 3. Choose **Remote Rule Group…**
 4. Paste the raw URL
 5. Click **Add**
-
-Little Snitch’s documentation recommends using a secure HTTPS URL with a valid certificate for remote rule groups, and GitHub raw URLs are a common way to host them.  [oai_citation:2‡GitHub](https://github.com/jkamenik/little-snitch-rules?utm_source=chatgpt.com)
+6. Repeat for the second group
 
 ## Update Model
 
-When you change the `.lsrules` file in this repository and push a commit, subscribed Macs can fetch the updated version automatically based on the configured update interval for the remote rule group. Little Snitch supports this subscription model specifically for remote rule groups.  [oai_citation:3‡GitHub](https://github.com/leohidalgo/little-snitch---rule-groups?utm_source=chatgpt.com)
+When you change a `.lsrules` file in this repository and push a commit, subscribed Macs fetch the updated version automatically based on the configured update interval for the remote rule group.
 
 ## Rule Design Philosophy
 
@@ -67,7 +84,7 @@ This ruleset can break normal workflows, including:
 - `curl`-based install or update flows
 - AppleScript automations that reach internet services
 
-Start carefully. A good approach is to subscribe to the ruleset, observe blocked connections, and then add specific allow-rules for known-good destinations. Existing Little Snitch rule repositories also present rule subscriptions as building blocks rather than “install and forget” policies.  [oai_citation:4‡GitHub](https://github.com/jkamenik/little-snitch-rules?utm_source=chatgpt.com)
+Start carefully. A good approach is to subscribe to both rule groups, observe blocked connections, and then add specific allow-rules for other known-good destinations.
 
 ## File Format
 
@@ -87,19 +104,8 @@ Rules can define attributes such as:
 - `remote-addresses`
 - `disabled`
 
-For the official file format and supported fields, refer to the Little Snitch documentation:
-
-- Little Snitch rule groups and subscriptions
-- `.lsrules` file format documentation
-
-See Objective Development’s official documentation for the authoritative schema and behavior.  [oai_citation:5‡GitHub](https://github.com/leohidalgo/little-snitch---rule-groups?utm_source=chatgpt.com)
-
-## Example Raw URL
-
-Replace the placeholders below with your actual GitHub account and repository name:
-
-`https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/high-risk-executables-deny.lsrules`
+For the official file format and supported fields, refer to [Objective Development’s Little Snitch documentation](https://obdev.at/products/littlesnitch/index.html).
 
 ## License
 
-Add a license if you plan to share this repository publicly.
+MIT
