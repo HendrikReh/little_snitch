@@ -1,0 +1,18 @@
+{
+  "name": "High-Risk Executables Deny",
+  "description": "Block outbound internet for shells, scripting runtimes, and common download tools. Add narrow allow-rules only when needed.",
+  "rules": [
+    { "process": "/bin/sh", "remote": "any", "action": "deny" },
+    { "process": "/bin/bash", "remote": "any", "action": "deny" },
+    { "process": "/bin/zsh", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/osascript", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/python3", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/perl", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/ruby", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/curl", "remote": "any", "action": "deny" },
+    { "process": "/usr/bin/ssh", "remote": "any", "action": "deny" },
+    { "process": "/opt/homebrew/bin/curl", "remote": "any", "action": "deny", "disabled": true },
+    { "process": "/opt/homebrew/bin/wget", "remote": "any", "action": "deny", "disabled": true },
+    { "process": "/opt/homebrew/bin/python3", "remote": "any", "action": "deny", "disabled": true }
+  ]
+}
