@@ -1,1 +1,82 @@
-
+{
+  "name": "OpenAI AI Tools Exceptions",
+  "description": "Allow OpenAI and ChatGPT web/app connectivity for selected executables while keeping the base deny policy in place.",
+  "rules": [
+    {
+      "action": "allow",
+      "process": "/usr/bin/python3",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com",
+        "auth.openai.com",
+        "oaistatic.com",
+        "oaiusercontent.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/opt/homebrew/bin/python3",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com",
+        "auth.openai.com",
+        "oaistatic.com",
+        "oaiusercontent.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/usr/bin/curl",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com",
+        "auth.openai.com",
+        "oaistatic.com",
+        "oaiusercontent.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/opt/homebrew/bin/curl",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com",
+        "auth.openai.com",
+        "oaistatic.com",
+        "oaiusercontent.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/sh",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/bash",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/bin/zsh",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com"
+      ]
+    },
+    {
+      "action": "allow",
+      "process": "/usr/bin/osascript",
+      "remote-domains": [
+        "openai.com",
+        "chatgpt.com"
+      ]
+    }
+  ]
+}
